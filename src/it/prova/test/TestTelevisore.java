@@ -17,16 +17,19 @@ public class TestTelevisore {
 			
 			System.out.println("In tabella ci sono " + televisoreService.listAll().size() + " elementi.");
 
-			testInserimentoNuovoUser(televisoreService);
+			testInserimentoNuovoTelevisore(televisoreService);
+			System.out.println("In tabella ci sono " + televisoreService.listAll().size() + " elementi.");
+			
+			testGet(televisoreService);
 			System.out.println("In tabella ci sono " + televisoreService.listAll().size() + " elementi.");
 
-			testRimozioneUser(televisoreService);
+			testRimozioneTelevisore(televisoreService);
 			System.out.println("In tabella ci sono " + televisoreService.listAll().size() + " elementi.");
 
 			testFindByExample(televisoreService);
 			System.out.println("In tabella ci sono " + televisoreService.listAll().size() + " elementi.");
 
-			testUpdateUser(televisoreService);
+			testUpdateTelevisore(televisoreService);
 			System.out.println("In tabella ci sono " + televisoreService.listAll().size() + " elementi.");			
 
 		} catch (Exception e) {
@@ -36,7 +39,7 @@ public class TestTelevisore {
 	}
 
 
-	private static void testInserimentoNuovoUser(TelevisoreService televisoreService) throws Exception {
+	private static void testInserimentoNuovoTelevisore(TelevisoreService televisoreService) throws Exception {
 		System.out.println(".......testInserimentoNuovotelevisore inizio.............");
 		Televisore newTelevisoreInstance = new Televisore("samsung", "aab", new Date());
 		if (televisoreService.inserisciNuovo(newTelevisoreInstance) != 1)
@@ -45,8 +48,18 @@ public class TestTelevisore {
 		System.out.println("inserito nuovo record: " + newTelevisoreInstance);
 		System.out.println(".......testInserimentoNuovoTelevisore fine.............");
 	}
+	
+	private static void testGet(TelevisoreService televisoreService) throws Exception {
+		System.out.println(".......testGet inizio.............");
 
-	private static void testRimozioneUser(TelevisoreService televisoreService) throws Exception {
+		Televisore televisoreDaTrovareTramiteId = televisoreService.findById(1L);
+		if(televisoreDaTrovareTramiteId.getId() != 1) {
+			throw new RuntimeException("testUpdateTelevisore fallito ");
+		}	
+		System.out.println(".......testGet inizio.............");
+	}
+
+	private static void testRimozioneTelevisore(TelevisoreService televisoreService) throws Exception {
 		System.out.println(".......testRimozioneTelevisore inizio.............");
 		// recupero tutti gli user
 		List<Televisore> interoContenutoTabella = televisoreService.listAll();
@@ -84,7 +97,7 @@ public class TestTelevisore {
 		System.out.println(".......testFindByExample fine.............");
 	}
 
-	private static void testUpdateUser(TelevisoreService televisoreService) throws Exception {
+	private static void testUpdateTelevisore(TelevisoreService televisoreService) throws Exception {
 		System.out.println(".......testUpdateTelevisore inizio.............");
 
 		// inserisco i dati che poi modifico
@@ -106,7 +119,9 @@ public class TestTelevisore {
 			throw new RuntimeException("testUpdateTelevisore fallito ");
 
 		System.out.println("aggiornato record: " + toBeUpdated);
-		System.out.println(".......testUpdateTelevisore inizio.............");
+		System.out.println(".......testUpdateTelevisore fine.............");
 	}
+	
+	
 }
 
