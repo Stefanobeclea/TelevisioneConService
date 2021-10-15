@@ -105,14 +105,14 @@ public class TestTelevisore {
 			throw new RuntimeException("testUpdateTelevisore: inserimento preliminare fallito ");
 
 		// recupero col findbyexample e mi aspetto di trovarla
-		List<Televisore> risultatifindByExample = televisoreService.findByExample(new Televisore("Dell", "45POLL"));
+		List<Televisore> risultatifindByExample = televisoreService.findByExample(new Televisore("Asus", "ab12"));
 		if (risultatifindByExample.size() != 1)
 			throw new RuntimeException("testUpdateTelevisore: testFindByExample fallito ");
 
-		Long idGiovanna = risultatifindByExample.get(0).getId();
+		Long idTelevisioneDaModificare = risultatifindByExample.get(0).getId();
 		// ricarico per sicurezza con l'id individuato e gli modifico un campo
 		String nuovoModello = "55POLL";
-		Televisore toBeUpdated = televisoreService.findById(idGiovanna);
+		Televisore toBeUpdated = televisoreService.findById(idTelevisioneDaModificare);
 		toBeUpdated.setModello(nuovoModello);
 		System.out.println("Televisore per la modifica: " + toBeUpdated);
 		if (televisoreService.aggiorna(toBeUpdated) != 1)
